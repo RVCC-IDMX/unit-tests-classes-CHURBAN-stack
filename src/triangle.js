@@ -52,7 +52,8 @@ class Triangle extends Polygon {
    * must set the name to 'Triangle'
    */
   constructor(sides) {
-    // write your code here
+    super(sides);
+    this.name = 'Triangle';
   }
 
   /**
@@ -72,9 +73,7 @@ class Triangle extends Polygon {
    * 2) And the sum of the lengths of any two sides is greater
    * than the length of the third side.
    */
-  isValid() {
-    // write your code here
-  }
+  isValid() {}
 }
 
 module.exports = {
