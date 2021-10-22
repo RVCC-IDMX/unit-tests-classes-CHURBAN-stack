@@ -26,16 +26,16 @@
  *
  */
 class Thermometer {
-#celsius; 
+  #privatecelsius;
 
   /**
    * @constructor
    * @param {number} celsius
    */
   constructor(celsius) {
-    this.#celsius = celsius;
-    this.tempFahrenheit = this.#celsius * 1.8 + 32;
-    this.tempKelvin = this.#celsius + 273.15;
+    this.#privatecelsius = celsius;
+    this.tempFahrenheit = this.#privatecelsius * 1.8 + 32;
+    this.tempKelvin = this.#privatecelsius + 273.15;
   }
 
   /*  -------- celsius -------------------*/
@@ -46,7 +46,7 @@ class Thermometer {
    * @description - returns the celsius temperature
    * */
   get celsius() {
-  return this.#celsius;
+    return this.#privatecelsius;
   }
 
   /**
@@ -56,9 +56,9 @@ class Thermometer {
    * @description - sets the celsius temperature
    */
   set celsius(tempCelsius) {
-    this.#celsius = tempCelsius;
-    this.tempFahrenheit = this.#celsius * 1.8 + 32;
-    this.tempKelvin = this.#celsius + 273.15;
+    this.#privatecelsius = tempCelsius;
+    this.tempFahrenheit = this.#privatecelsius * 1.8 + 32;
+    this.tempKelvin = this.#privatecelsius + 273.15;
   }
 
   /*  -------- kelvin -------------------*/
@@ -69,7 +69,7 @@ class Thermometer {
    * @description - returns the kelvin temperature
    */
   get kelvin() {
-  return this.tempKelvin; 
+    return this.tempKelvin;
   }
 
   /**
@@ -80,7 +80,7 @@ class Thermometer {
    */
   set kelvin(tempKelvin) {
     this.tempKelvin = tempKelvin;
-    this.#celsius = this.tempKelvin - 273.15;
+    this.#privatecelsius = this.tempKelvin - 273.15;
     this.tempFahrenheit = this.tempKelvin * (9 / 5) - 459.67;
   }
 
@@ -92,7 +92,7 @@ class Thermometer {
    * @description - returns the fahrenheit temperature
    */
   get fahrenheit() {
-  return this.tempFahrenheit; 
+    return this.tempFahrenheit;
   }
 
   /**
@@ -102,7 +102,9 @@ class Thermometer {
    * @description - sets the fahrenheit temperature
    */
   set fahrenheit(tempFahrenheit) {
-  
+    this.tempFahrenheit = tempFahrenheit;
+    this.tempKelvin = ((tempFahrenheit - 32) * 5) / 9 + 273.15;
+    this.#privatecelsius = ((tempFahrenheit - 32) * 5) / 9;
   }
 
   /**
@@ -120,7 +122,13 @@ class Thermometer {
    *
    */
   toString(unit) {
-  
+    if (unit === 'K') {
+      return `${this.tempKelvin}K`;
+    }
+    if (unit === 'F') {
+      return `${this.tempFahrenheit}°F`;
+    }
+    return `${this.#privatecelsius}°C`;
   }
 }
 module.exports = {

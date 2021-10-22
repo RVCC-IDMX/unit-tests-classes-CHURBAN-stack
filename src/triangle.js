@@ -73,7 +73,21 @@ class Triangle extends Polygon {
    * 2) And the sum of the lengths of any two sides is greater
    * than the length of the third side.
    */
-  isValid() {}
+  isValid() {
+    const isarr = Array.isArray(this.sides) && this.sides.length === 3;
+    if (isarr) {
+      const isnum = this.sides.every((side) => typeof side === 'number');
+      if (isnum) {
+        const t0 = this.sides[0] + this.sides[1] > this.sides[2];
+        const t1 = this.sides[1] + this.sides[2] > this.sides[0];
+        const t2 = this.sides[2] + this.sides[0] > this.sides[1];
+        if (t0 && t1 && t2) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
 }
 
 module.exports = {
